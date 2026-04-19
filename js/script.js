@@ -27,6 +27,36 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
 });
 
+const servicesSection = document.querySelector('.services');
+const servicesToggleButton = document.querySelector('.services-toggle-btn');
+const servicesContent = document.querySelector('.services-content');
+
+if (servicesSection && servicesToggleButton && servicesContent) {
+    const updateServicesToggle = () => {
+        if (window.innerWidth <= 768) {
+            servicesToggleButton.style.display = 'inline-flex';
+            servicesToggleButton.setAttribute('aria-expanded', 'false');
+            servicesToggleButton.textContent = 'Show Services';
+            servicesSection.classList.remove('showing');
+            servicesContent.classList.add('services-collapsed');
+        } else {
+            servicesToggleButton.style.display = 'none';
+            servicesContent.classList.remove('services-collapsed');
+            servicesSection.classList.remove('showing');
+        }
+    };
+
+    servicesToggleButton.addEventListener('click', () => {
+        const expanded = servicesToggleButton.getAttribute('aria-expanded') === 'true';
+        servicesToggleButton.setAttribute('aria-expanded', String(!expanded));
+        servicesToggleButton.textContent = expanded ? 'Show Services' : 'Hide Services';
+        servicesSection.classList.toggle('showing');
+    });
+
+    window.addEventListener('resize', updateServicesToggle);
+    updateServicesToggle();
+}
+
 // Enhanced Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,

@@ -418,6 +418,55 @@ header {
     gap: 2rem;
 }
 
+.services-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.services-toggle-btn {
+    display: none;
+    border: 1px solid var(--text);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.9rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.services-toggle-btn:hover {
+    background: var(--surface-soft);
+}
+
+.services-content {
+    transition: max-height 0.35s ease, opacity 0.35s ease;
+    overflow: hidden;
+    max-height: 10000px;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .services-toggle-btn {
+        display: inline-flex;
+    }
+
+    .services-content.services-collapsed {
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .services.showing .services-content {
+        max-height: 10000px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
 .service-card {
     background: var(--surface);
     padding: 2.5rem;
@@ -1158,7 +1207,8 @@ footer {
     }
 
     .location-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 1.5rem;
     }
 
     .social-media {
@@ -1168,6 +1218,13 @@ footer {
     .team-links {
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    .services-grid,
+    .gallery-grid,
+    .testimonials-grid,
+    .team-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
     }
 }
 
@@ -1198,8 +1255,18 @@ footer {
     .services-grid,
     .gallery-grid,
     .testimonials-grid,
-    .team-grid {
-        grid-template-columns: 1fr;
+    .team-grid,
+    .location-grid {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+
+    .services-grid .service-card,
+    .testimonials-grid .testimonial-card,
+    .team-grid .team-member,
+    .gallery-grid .gallery-item,
+    .location-grid .location-card {
+        padding: 1.5rem;
     }
 
     .about-content,
@@ -1212,6 +1279,15 @@ footer {
     }
 }
 
+@media (max-width: 420px) {
+    .services-grid,
+    .gallery-grid,
+    .testimonials-grid,
+    .team-grid,
+    .location-grid {
+        grid-template-columns: 1fr;
+    }
+}
 /* Footer Responsive */
 @media (max-width: 1024px) {
     .footer-content {
