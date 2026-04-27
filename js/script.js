@@ -76,34 +76,27 @@ document.querySelectorAll('.service-card, .gallery-item, .testimonial-card, .tea
     observer.observe(el);
 });
 
-// Form submission with enhanced validation
-const contactForm = document.getElementById('contactForm');
+// Formspree AJAX handles form submission automatically
+// The following code adds custom success/error handling
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Prevent default form submission
-
-    // Enhanced form validation
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    if (!name || !email || !message) {
-        showNotification('Please fill in all fields.', 'error');
-        return;
-    }
-
-    // Enhanced email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        showNotification('Please enter a valid email address.', 'error');
-        return;
-    }
-
-    // Show success message
-    showNotification('Thank you! Your message has been sent. We will get back to you soon.', 'success');
-
-    // Reset form
-    contactForm.reset();
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    const successDiv = document.getElementById('formSuccess');
+    const errorDiv = document.getElementById('formError');
+    
+    // Listen for Formspree events
+    form.addEventListener('fs:submit', () => {
+        showNotification('Sending your message...', 'info');
+    });
+    
+    form.addEventListener('fs:success', () => {
+        showNotification('Thank you! Your message has been sent. We will get back to you soon.', 'success');
+        form.reset();
+    });
+    
+    form.addEventListener('fs:error', (event) => {
+        showNotification('Sorry, there was a problem sending your message. Please try again.', 'error');
+    });
 });
 
 // Notification system
