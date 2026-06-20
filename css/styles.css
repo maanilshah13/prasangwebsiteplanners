@@ -219,12 +219,11 @@ header {
 
 /* Hero Section */
 .hero {
-    min-height: 80vh;
+    min-height: 90vh;
     position: relative;
     display: grid;
     place-items: center;
-    padding: 120px 0 4rem;
-    text-align: center;
+    padding: 140px 0 4rem;
     overflow: hidden;
     background: radial-gradient(circle at top left, rgba(255, 231, 171, 0.22), transparent 28%),
                 radial-gradient(circle at bottom right, rgba(31, 78, 58, 0.12), transparent 24%),
@@ -270,62 +269,205 @@ header {
     z-index: 0;
 }
 
+.hero-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-copy,
+.hero-visual {
+    animation: fadeInUp 1s ease-out both;
+}
+
+.hero-copy {
+    display: grid;
+    gap: 1.75rem;
+    text-align: left;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
 .hero-content {
     position: relative;
     z-index: 1;
-    animation: fadeInUp 1s ease-out both;
-    padding: 2.5rem 2rem;
+    animation: none;
+    padding: 2.5rem 2.5rem;
     border-radius: var(--border-radius-large);
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid rgba(210, 155, 45, 0.12);
     box-shadow: 0 28px 90px rgba(31, 78, 58, 0.08);
     max-width: 760px;
-    margin: 0 auto;
+    margin: 0;
     backdrop-filter: blur(12px);
 }
 
-.hero-content::before {
-    content: '';
-    position: absolute;
-    right: -32px;
-    top: -32px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: rgba(210, 155, 45, 0.18);
-    filter: blur(16px);
-    z-index: -1;
-    animation: float 10s ease-in-out infinite;
-}
-
+.hero-content::before,
 .hero-content::after {
-    content: '';
-    position: absolute;
-    left: -28px;
-    bottom: -28px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: rgba(26, 60, 94, 0.12);
-    filter: blur(12px);
-    z-index: -1;
-    animation: float 12s ease-in-out infinite reverse;
-}
-
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    align-items: center;
+    display: none;
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    line-height: 1.1;
+    font-size: clamp(3rem, 4vw, 4.2rem);
+    line-height: 1.05;
     color: var(--text);
-    max-width: 700px;
-    margin-bottom: 2rem;
+    max-width: 680px;
+    margin-bottom: 0.8rem;
     letter-spacing: -0.03em;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    max-width: 640px;
+    color: #4d5f72;
+    margin: 0;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.highlight {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: rgba(31, 78, 58, 0.05);
+    border: 1px solid rgba(31, 78, 58, 0.1);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+}
+
+.highlight-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, rgba(210, 155, 45, 0.18), rgba(31, 78, 58, 0.12));
+    color: var(--secondary);
+    font-size: 1rem;
+}
+
+.highlight strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+.highlight span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.hero-visual {
+    display: grid;
+    justify-items: end;
+}
+
+.hero-card {
+    width: min(100%, 420px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,249,251,0.96));
+    border: 1px solid rgba(31, 78, 58, 0.12);
+    border-radius: calc(var(--border-radius-large) + 4px);
+    box-shadow: 0 32px 90px rgba(31, 78, 58, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(210, 155, 45, 0.15), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(31, 78, 58, 0.08), transparent 26%);
+    pointer-events: none;
+}
+
+.hero-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem 0.85rem;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-card-header span {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    background: rgba(210, 155, 45, 0.12);
+    color: var(--primary);
+    font-size: 0.83rem;
+    font-weight: 700;
+}
+
+.hero-card-body {
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+.hero-card-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-card-footer {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.hero-card-footer h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.25rem;
+    color: var(--text);
+}
+
+.hero-card-footer p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
 }
 
 .hero-subtitle {
@@ -1279,8 +1421,20 @@ footer {
         gap: 3rem;
     }
 
+    .hero-buttons {
+        justify-content: center;
+    }
+
     .hero-title {
         font-size: 3.5rem;
+    }
+
+    .hero-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+        justify-items: center;
     }
 
     .services-grid,
@@ -1288,6 +1442,28 @@ footer {
     .testimonials-grid,
     .team-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-copy {
+        text-align: center;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+        justify-items: center;
     }
 }
 
